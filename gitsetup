@@ -67,7 +67,6 @@ fi
 
 GITHUB_ACCOUNT=`echo $3`
 
-REMOTE=`echo $GITHUB_ACCOUNT`
 
 NEW_BRANCH=`echo $2`
 UPSTREAM_BRANCH=`echo $1`

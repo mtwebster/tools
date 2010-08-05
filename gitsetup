@@ -1,12 +1,13 @@
 #!/bin/sh
 
 # Github configuration of individual repositories for Android development
+# Borrowed and modified from: http://blog.mhartl.com/2008/10/14/setting-up-your-git-repositories-for-open-source-projects-at-github/
 #
 # Download this and run: 
 #
 # chmod a+x gitsetup
 #
-# to make it executable
+# to make it executable.  Ideally you put this in a folder that is in your path so you can run it from any folder.
 #
 # Requirements:
 # 1. Repo tool-based initial setup

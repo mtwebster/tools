@@ -10,8 +10,8 @@
 # when you just do an update
 #
 #
-ANDROID_ROOT="/home/mike/bin/cyanogen"
-BUILD_DEVICE="sholes"
+ANDROID_ROOT="</home/...path to android source root folder...>"
+BUILD_DEVICE="<device engineering name> - sholes, passion, etc..."
 #
 #
 #

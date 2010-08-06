@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Script for repeatedly reinstalling a system app to your phone for testing
+#
+# Set ANDROID_ROOT to the path of your root android source folder
+# Set BUILD_DEVICE to the device name (sholes, passion, etc.. the development name)
+#
+# use flag "up" to update an existing app (adb install -r)
+# use flag "push" to replace the app (needs reboot) - this is necessary for some apps that get screwed up permissions
+# when you just do an update
+#
+#
+ANDROID_ROOT="/home/mike/bin/cyanogen"
+BUILD_DEVICE="sholes"
+#
+#
+#
+#
+if [ $# -ne "2" ]
+then
+  echo "Usage: appinstall [apk name] [up | push]"
+  echo "Apk name should be the name of the /system/app/<app> without the .apk extension"
+  echo "up - update app (adb install -r)"
+  echo "push - pull old/push new (will need reboot) - old will be discarded"
+  exit 1
+fi
+
+catch_error() {
+  if [ $1 -ne "0" ]
+  then
+    echo "ERROR encountered $2"
+    exit 1
+  fi
+}
+
+
+if [ $2 = "up" ]
+then 
+  cd $ANDROID_ROOT/out/target/product/$BUILD_DEVICE/system/app
+  echo Updating $1.apk on device
+  adb install -r $1.apk
+  catch_error $? "Updating $1.apk on device"
+  cd $ANDROID_ROOT
+  echo Success!
+fi
+
+if [ $2 = "push" ]
+then 
+  cd $ANDROID_ROOT/out/target/product/$BUILD_DEVICE/system/app
+  echo Mounting device system to R/W....
+  adb remount
+  catch_error $? "Mounting device system to R/W"
+  echo Pulling old app $1.apk....
+  adb pull /system/app/$1.apk ~/
+  catch_error $? "Pulling old $1.apk"
+  echo Pushing new app $1.apk....
+  adb push $1.apk /system/app
+  catch_error $? "Pushing new $1.apk"
+  cd $ANDROID_ROOT
+  rm ~/$1.apk
+  echo Success!  Reboot needed to initialize app.
+fi
+
+
+
+exit 0

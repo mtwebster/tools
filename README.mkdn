@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--This file was converted to xhtml by OpenOffice.org - see http://xml.openoffice.org/odf2xhtml for more info.-->
+
+<p class="P16">
+  Collection of tools for Android source development
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P17">
+  gitsetup
+</p>
+
+<p class="P6">
+   
+</p>
+
+<p class="P5">
+  Github configuration of individual repositories
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P5">
+  Borrowed and modified from:
+</p>
+
+<p class="P20">
+  <a href="http://blog.mhartl.com/2008/10/14/setting-up-your-git-repositories-for-open-source-projects-at-github/"><span class="T2">http://blog.mhartl.com/2008/10/14/setting-up-your-git-repositories-for-open-source-projects-at-github/</span></a>
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P1">
+  <span class="T2">Download this and run:</span>
+</p>
+
+<p class="Standard">
+   
+</p>
+
+<p class="P2">
+  chmod a+x gitsetup
+</p>
+
+<p class="Standard">
+   
+</p>
+
+<p class="P6">
+  to make it executable.  Ideally you put this in a folder that is in your path so you can run it from any folder.
+</p>
+
+<p class="P6">
+   
+</p>
+
+<p class="P6">
+  Requirements:
+</p>
+
+<p class="P5">
+   
+</p>
+
+1.  <p class="P7" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">1.</span>Repo tool-based initial setup<span class="odfLiEnd" /> 
+    </p>
+
+2.  <p class="P7" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">2.</span>Fork of desired repository (i.e. frameworks_base, phone, etc..)<span class="odfLiEnd" /> 
+    </p>
+
+3.  <p class="P7" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">3.</span>Configured git installation<span class="odfLiEnd" /> 
+    </p>
+
+4.  <p class="P7" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">4.</span> Be in top-level folder of the repository you want to configure (i.e. for Phone app, ~/<my_project>/packages/apps/Phone)<span class="odfLiEnd" /> 
+    </p>
+    
+    <p class="P7" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm"><!-- --></span>
+      
+      <span class="odfLiEnd" /> 
+    </p>
+
+<p class="P6">
+  Usage:
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P2">
+  gitsetup [tracking branch] [new branch] [git@ address for your fork]
+</p>
+
+<p class="P20">
+   
+</p>
+
+<p class="Standard">
+   
+</p>
+
+<p class="Standard">
+  This script will setup your git config (for a particular individual repository) to simplify modifying code and pushing it to your personal fork of that repository.
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P6">
+  It will:
+</p>
+
+<p class="P6">
+   
+</p>
+
+*   <p class="P9" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Setup to track changes to [tracking branch]<span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P9" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Create a new branch named [new branch] based off the tracking branch<span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P9" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Check out that new branch<span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P9" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Push an initial commit to your github to create that branch, at the specified git@ address<span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P9" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Set up an alias for interacting with that fork, defined by MY_REMOTE below<span class="odfLiEnd" /> 
+    </p>
+    
+    <p class="P14" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm"><!-- --></span>
+      
+      <span class="odfLiEnd" /> 
+    </p>
+
+<p class="P6">
+  The resulting configuration will allow you to perform such things as:
+</p>
+
+<p class="P5">
+   
+</p>
+
+*   <p class="P10" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Allow you to <span class="T1">repo sync</span> your entire project (without having to worry about how your individual changes will be affected.<span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P10" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Pull and push from your Github simply by entering <span class="T1">git push <my_remote> <branch></span><span class="odfLiEnd" /> 
+    </p>
+    
+    <p class="P15" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm"><!-- --></span>
+      
+      <span class="odfLiEnd" /> 
+    </p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P6">
+  Common things I do once I've set up the git config on a particular repository I'm working on:
+</p>
+
+<p class="P5">
+   
+</p>
+
+*   <p class="P4" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span><span class="T2">(following a git commit)</span> <span class="T1">git push <myremote> <mybranch></span> <span class="T2">............ Pushes latest commit(s) to Github</span><span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P4" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span><span class="T1">git pull --rebase github <tracking branch></span><span class="T2">.....Re-sync my local copy of the tracking branch, then apply my commits to the end (this keeps the commit history clean, so when it's time to do a pull request, there aren't a bunch merges clouding things up.  This is what the repo tool runs on each repository when you do </span><span class="T1">repo sync</span><span class="T2">.  By the way, the 'github' in that command is the name the repo tool assigns to the "upstream" address of "git://github.com/"</span><span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P11" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>(following a git commit) <span class="T1">git push --force <myremote> <mybranch></span>..... resets my Github branch with my local branch,  FORCING the local history - basically overwrites the Github copy with my local copy.  WARNING - you will lose any history on your Github that isn't also in your local branch.  This is generally considered bad form, but I do it before issuing a Pull Request, as I tend to use Github as a "backup" tool, and when I'm all done with stuff, I'd rather have all my changes in a single commit.<span class="odfLiEnd" /> 
+    </p>
+    
+    <p class="P22" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm"><!-- --></span>
+      
+      <span class="odfLiEnd" /> 
+    </p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P6">
+  One configuration option to make (optional,) at the beginning of the script (after the introductory comments):
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P2">
+  MY_REMOTE="mygit"
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P8">
+  Enter a simple name to make pushing/pulling easier.  This will NOT be seen publicly.  It simply replaces having to enter git@github.com:<you>/<yourfork> every time you want to interact  with your fork.  Instead you can just enter 'git push mygit <myfork>' and so on.
+</p>
+
+<p class="P21">
+   
+</p>
+
+<p class="P21">
+   
+</p>
+
+<p class="Standard">
+   
+</p>
+
+<p class="P19">
+  <span class="T2">appinstall</span>
+</p>
+
+<p class="Standard">
+  <span class="T2" />
+</p>
+
+<p class="P5">
+  Script for repeatedly reinstalling a system app to your phone for testing in an Android source build environment.
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P5">
+  Download this and run:
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P2">
+  chmod a+x appinstall
+</p>
+
+<p class="P5" />
+
+<p class="P5">
+  to make it executable.  Ideally you put this in a folder that is in your path so you can run it from any folder.
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P6">
+  Requirements:
+</p>
+
+<p class="P6">
+   
+</p>
+
+1.  <p class="P12" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">1.</span>Repo tool-based initial setup<span class="odfLiEnd" /> 
+    </p>
+
+2.  <p class="P12" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">2.</span>Fully compiled source (with ‘out’ folder structure for your device)<span class="odfLiEnd" /> 
+    </p>
+
+3.  <p class="P12" style="margin-left:0cm;">
+      <span class="Numbering_20_Symbols" style="display:block;float:left;min-width:0cm">3.</span>Functional ADB (Android Debug Bridge) interface to your phone<span class="odfLiEnd" /> 
+    </p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P6">
+  Usage:
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P2">
+  appinstall [apk name] [up OR push]
+</p>
+
+<p class="P2">
+   
+</p>
+
+<p class="P6">
+  Where:
+</p>
+
+<p class="P5">
+   
+</p>
+
+<p class="P8">
+  <span class="T1">[apk name]:</span>
+</p>
+
+*   <p class="P18" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>Name of system app without the .apk extension (Phone, Contacts, etc..) Case sensitive!<br /><span style="margin-left:0cm" /><span class="odfLiEnd" /> 
+    </p>
+
+<p class="P3">
+  [up | push]:
+</p>
+
+*   <p class="P13" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>up – Will perform an install –r <apk name> to update the app.  Note that this can sometimes cause the app to Force Close due to permissions issues.  Also, upon reboot, the ‘updates’ will be lost<span class="odfLiEnd" /> 
+    </p>
+
+*   <p class="P13" style="margin-left:0cm;">
+      <span class="Bullet_20_Symbols" style="display:block;float:left;min-width:0cm">•.</span>push – Will perform a pull/push to completely replace the app.  This requires a reboot for replacement to take effect<span class="odfLiEnd" /> 
+    </p>
+
+<p class="P23">
+   
+</p>
+
+<p class="P8">
+   
+</p>
+
+<p class="P6">
+  Required variable settings in script:
+</p>
+
+<p class="P6">
+   
+</p>
+
+<p class="P5">
+  <span class="T1">ANDROID_ROOT</span>: <span class="T7">Path to the root folder of your Android source tree (i.e. /mike/<you>/bin/android)</span>
+</p>
+
+<p class="P5">
+  <span class="T7" />
+</p>
+
+<p class="P8">
+  <span class="T1">BUILD_DEVICE</span>: Engineering name for the device you’re testing on (i.e. sholes, passion, etc…)
+</p>
+
+<p class="P8">
+   
+</p>

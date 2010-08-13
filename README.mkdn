@@ -45,7 +45,8 @@ This script will setup your git config (for a particular individual repository) 
 
 It will either (depending on the usage):
 
-3 Arguments:
+**3 Arguments**
+
   - Setup to track changes to [tracking branch]
   - Create a new branch named [new branch] based off the tracking branch
   - Check out that new branch
@@ -56,16 +57,17 @@ It will either (depending on the usage):
 
 or
 
-2 Arguments:
+**2 Arguments**
+
   - Setup to track changes to [tracking branch]
   - Check out [tracking branch]
   - Set up an alias for interacting with that fork, defined by MY_REMOTE below
 
-**Note: If you do this, and it has been some time since you originally forked
+*Note: If you do this, and it has been some time since you originally forked
 the repository on github, when you do a `git status` you may get a message like:
 `Your branch is ahead of XXXXX by NN commits`
 If you see that, simply do a `git push [mygit] [branch]` and it will update 
-the github branch to match your current local branch**
+the github branch to match your current local branch*
 
 
 The resulting configuration will allow you to perform such things as:

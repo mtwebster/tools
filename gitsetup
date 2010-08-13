@@ -17,16 +17,33 @@
 # 
 # Usage:
 # gitsetup [tracking branch] [new branch] [git@ address for your fork]
+# 
+# or
+#
+# gitsetup [tracking branch] [git@ address for your repository]
+#
 #
 # This script will setup your git config (for a particular individual repository)
 # to simplify modifying code and pushing it to your personal fork of that repository
-# It will:
 # 
+# Depending on the arguments you provide, it will:
+# 
+# a)
 # Setup to track changes to [tracking branch]
 # Create a new branch named [new branch] based off the tracking branch
 # Check out that new branch
 # Push an initial commit to your github to create that branch, at the specified git@ address
 # Set up an alias for interacting with that fork, defined by MY_REMOTE below
+#
+# b)
+# Setup to track changes to [tracking branch]
+# Checkout that branch
+# Set up an alias for interacting with that fork, defined by MY_REMOTE below
+# -----  Note: If you do this, and it has been some time since you originally forked
+# -----        the repository on github, when you do a 'git status' you may get a message like:
+# -----             "Your branch is ahead of XXXXX by NN commits"
+# -----        If you see that, simply do a "git push [mygit] [branch] and it will update 
+# -----        the github branch to match your current local branch
 #
 # The resulting configuration will allow you to perform such things as:
 #
@@ -59,17 +76,38 @@ MY_REMOTE="mygit"
 #
 #
 #
-if [ $# -ne "3" ]
+if [ $# -lt "2" ]
 then
+  echo
+  echo
+  echo "To create a new branch for yourself that tracks an existing branch:"
   echo "Usage: gitsetup [tracking branch] [new branch] [git@ address for your repository]"
+  echo
+  echo
+  echo "To setup to develop on an existing branch:"
+  echo "Usage: gitsetup [tracking branch] [git@ address for your repository]" 
+  echo
+  echo
   exit 1
 fi
 
-GITHUB_ACCOUNT=`echo $3`
+if [ $# = "3" ]
+then
+  GITHUB_ACCOUNT=`echo $3`
+  NEW_BRANCH=`echo $2`
+  UPSTREAM_BRANCH=`echo $1`
+  DO_NEW="1"
+fi
+
+if [ $# = "2" ]
+then
+  GITHUB_ACCOUNT=`echo $2`
+  UPSTREAM_BRANCH=`echo $1`
+  NEW_BRANCH=`echo $1`
+  DO_NEW="0"
+fi
 
 
-NEW_BRANCH=`echo $2`
-UPSTREAM_BRANCH=`echo $1`
 # Error handling function
 catch_error() {
   if [ $1 -ne "0" ]
@@ -87,11 +125,15 @@ echo "Creating local tracking branch for ..."
 git branch --track $UPSTREAM_BRANCH github/$UPSTREAM_BRANCH
 catch_error $? "creating local tracking branch for $UPSTREAM_BRANCH"
 
-# Create a local branch based off upstream
+# Create a local branch based off upstream or not depending on number of args
 #
-echo "Creating local branch $NEW_BRANCH..."
-git branch $NEW_BRANCH $UPSTREAM_BRANCH
-catch_error $? "creating local branch $NEW_BRANCH"
+
+if [ "$DO_NEW" = "1" ]
+then
+  echo "Creating local branch $NEW_BRANCH..."
+  git branch $NEW_BRANCH $UPSTREAM_BRANCH
+  catch_error $? "creating local branch $NEW_BRANCH"
+fi
 
 git checkout $NEW_BRANCH
 catch_error $? "checking out local branch $NEW_BRANCH"
@@ -120,9 +162,12 @@ echo
 #
 # We need to explicitly create the branch via a push command
 #
-echo "Pushing local branch $NEW_BRANCH to remote $MY_REMOTE..."
-git push $MY_REMOTE $NEW_BRANCH:refs/heads/$NEW_BRANCH
-catch_error $? "pushing local branch $NEW_BRANCH to remote $MY_REMOTE"
+if [ "$DO_NEW" = "1" ]
+then
+  echo "Pushing local branch $NEW_BRANCH to remote $MY_REMOTE..."
+  git push $MY_REMOTE $NEW_BRANCH:refs/heads/$NEW_BRANCH
+  catch_error $? "pushing local branch $NEW_BRANCH to remote $MY_REMOTE"
+fi
 
 echo
 

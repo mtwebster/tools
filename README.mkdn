@@ -34,14 +34,18 @@ Usage:
 
     gitsetup [tracking branch] [new branch] [git@ address for your fork]
 
+or
+
+    gitsetup [tracking branch] [git@ address for your fork]
 
 ----------
 
 
 This script will setup your git config (for a particular individual repository) to simplify modifying code and pushing it to your personal fork of that repository. 
 
-It will:
+It will either (depending on the usage):
 
+a) 
   - Setup to track changes to [tracking branch]
   - Create a new branch named [new branch] based off the
     tracking branch
@@ -51,13 +55,28 @@ It will:
   - Set up an alias for interacting with that fork, defined
     by MY_REMOTE below
 
+or
+
+b)
+  - Setup to track changes to [tracking branch]
+  - Check out [tracking branch]
+  - Set up an alias for interacting with that fork, defined
+    by MY_REMOTE below
+
+    Note: If you do this, and it has been some time since you originally forked
+          the repository on github, when you do a `git status` you may get a message like:
+          `Your branch is ahead of XXXXX by NN commits`
+          If you see that, simply do a `git push [mygit] [branch]` and it will update 
+          the github branch to match your current local branch
+
+
 The resulting configuration will allow you to perform such things as:
 
   - Allow you to repo sync your entire project (without
     having to worry about how your individual changes will
     be affected.
   - Pull and push from your Github simply by
-    entering git push <my_remote> <branch>
+    entering `git push <my_remote> <branch>`
 
 Common things I do once I've set up the git config on a particular repository I'm working on:
 
